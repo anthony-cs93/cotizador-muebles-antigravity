@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "Cotizador Melamina"
+version = "1.0.0"
+id = "artifacts/cotizador-melamina"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 19165
+
+[services.development]
+run = "pnpm --filter @workspace/cotizador-melamina run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/cotizador-melamina", "run", "build" ]
+publicDir = "artifacts/cotizador-melamina/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "19165"
+BASE_PATH = "/"
